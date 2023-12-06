@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript</title>
+</head>
+<body>
+
+
+    <!-- Multiplication -->
+
+    <h2>Multiplication Table</h2>
+    <label for="numberInput">Enter a number: </label>
+    <input type="number" id="numberInput">
+    <button onclick="generateTable()">Generate Table</button>
+    
+
+    <!-- larger number  -->
+
+    <h2>Largest of Three Numbers</h2>
+    <label for="num1">Number 1: </label>
+    <input type="number" id="num1"><br>
+    <label for="num2">Number 2: </label>
+    <input type="number" id="num2"><br>
+    <label for="num3">Number 3: </label>
+    <input type="number" id="num3"><br>
+    <button onclick="findLargest()">Find Largest</button>
+    
+
+    <!-- facotrial -->
+
+    <h2>Factorial of a Number</h2>
+    <label for="factorialInput">Enter a number: </label>
+    <input type="number" id="factorialInput">
+    <button onclick="calculateFactorial()">Calculate Factorial</button>
+    
+    
+    <!-- sum and average  -->
+
+    <h2>Sum and Average of Positive Numbers</h2>
+    <p>Enter a list of positive numbers using the prompt, terminated by a zero.</p>
+    <button onclick="calculateSumAndAverage()">Enter Numbers</button>
+    
+    <p>RESULT OF YOUR CALCULATION-</p>
+    <p id="result"></p>
+
+    <script>
+        function generateTable() {
+            var number = document.getElementById('numberInput').value;
+            var result = document.getElementById('result');
+            result.innerHTML = '';
+
+            if (!isNaN(number) && number !== '') {
+                for (var i = 1; i <= 10; i++) {
+                    result.innerHTML += number + " x " + i + " = " + (number * i) + "<br>";
+                }
+            } else {
+                result.innerHTML = 'Please enter a valid number.';
+            }
+        }
+
+
+
+        function findLargest() {
+            var num1 = parseFloat(document.getElementById('num1').value);
+            var num2 = parseFloat(document.getElementById('num2').value);
+            var num3 = parseFloat(document.getElementById('num3').value);
+
+            var result = document.getElementById('result');
+            result.innerHTML = '';
+
+            if (!isNaN(num1) && !isNaN(num2) && !isNaN(num3)) {
+                var largest = Math.max(num1, num2, num3);
+                result.innerHTML = 'The largest number is: ' + largest;
+            } else {
+                result.innerHTML = 'Please enter valid numbers.';
+            }
+        }
+
+
+
+
+        function calculateFactorial() {
+            var number = parseInt(document.getElementById('factorialInput').value);
+            var result = document.getElementById('result');
+            result.innerHTML = '';
+
+            if (!isNaN(number) && number >= 0) {
+                var factorial = 1;
+                for (var i = 1; i <= number; i++) {
+                    factorial *= i;
+                }
+                result.innerHTML = 'The factorial of ' + number + ' is: ' + factorial;
+            } else {
+                result.innerHTML = 'Please enter a non-negative integer.';
+            }
+        }
+
+
+        function calculateSumAndAverage() {
+            var numbers = [];
+            var input;
+            do {
+                input = parseFloat(prompt('Enter a positive number (enter 0 to finish):'));
+                if (!isNaN(input) && input >= 0) {
+                    numbers.push(input);
+                } else if (input !== 0) {
+                    alert('Please enter a valid positive number.');
+                }
+            } while (input !== 0);
+
+            var result = document.getElementById('result');
+            if (numbers.length > 0) {
+                var sum = numbers.reduce((acc, num) => acc + num, 0);
+                var average = sum / numbers.length;
+                result.innerHTML = 'Sum: ' + sum + '<br>Average: ' + average.toFixed(2);
+            } else {
+                result.innerHTML = 'No valid positive numbers entered.';
+            }
+        }
+
+    </script>
+</body>
+</html>

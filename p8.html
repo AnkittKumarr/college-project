@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 400px;
+            max-width: 100%;
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #555;
+        }
+
+        input,
+        select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        button {
+            background-color: #4caf50;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .error-message {
+            color: #ff0000;
+            margin-top: -10px;
+            margin-bottom: 10px;
+        }
+    </style>
+    <title>Student Registration Form</title>
+</head>
+
+<body>
+
+    <form action="#" method="post" onsubmit="return validateForm()">
+        <h2>Student Registration</h2>
+
+        <label for="rollNumber">Roll Number:</label>
+        <input type="text" id="rollNumber" name="rollNumber">
+        <span class="error-message" id="rollNumberError"></span>
+
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name">
+        <span class="error-message" id="nameError"></span>
+
+        <label for="dob">Date of Birth:</label>
+        <input type="date" id="dob" name="dob">
+        <span class="error-message" id="dobError"></span>
+
+        <label for="gender">Gender:</label>
+        <select id="gender" name="gender">
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+            <option value="other">Other</option>
+        </select>
+
+        <label>Choose Courses:</label>
+        <input type="checkbox" id="courseMath" name="courses" value="Math">
+        <label for="courseMath">Math</label>
+        <input type="checkbox" id="coursePhysics" name="courses" value="Physics">
+        <label for="coursePhysics">Physics</label>
+        <span class="error-message" id="coursesError"></span>
+
+        <button type="submit">Submit</button>
+    </form>
+
+    <script>
+        function validateForm() {
+            var rollNumber = document.getElementById('rollNumber').value;
+            var name = document.getElementById('name').value;
+            var dob = document.getElementById('dob').value;
+            var courses = document.querySelectorAll('input[name="courses"]:checked');
+
+            var rollNumberError = document.getElementById('rollNumberError');
+            var nameError = document.getElementById('nameError');
+            var dobError = document.getElementById('dobError');
+            var coursesError = document.getElementById('coursesError');
+
+            rollNumberError.textContent = '';
+            nameError.textContent = '';
+            dobError.textContent = '';
+            coursesError.textContent = '';
+
+            var isValid = true;
+
+            // Validate Roll Number
+            if (!/^\d{7}$/.test(rollNumber)) {
+                rollNumberError.textContent = 'Roll Number should be a 7-digit numeric value.';
+                isValid = false;
+            }
+
+            // Validate Name
+            if (!/^[a-zA-Z\s]+$/.test(name)) {
+                nameError.textContent = 'Name should contain only alphabetical characters.';
+                isValid = false;
+            }
+
+            // Validate Date of Birth
+            if (dob === '') {
+                dobError.textContent = 'Date of Birth is required.';
+                isValid = false;
+            }
+
+            // Validate Courses
+            if (courses.length === 0) {
+                coursesError.textContent = 'At least one course should be selected.';
+                isValid = false;
+            }
+
+            return isValid;
+        }
+    </script>
+
+</body>
+
+</html>
